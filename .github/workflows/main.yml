@@ -28,3 +28,14 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           flutter pub get
+
+      - name: Run flutter build
+        run: flutter build aar
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@1.0.5
+          with: 
+            name: aar
+            path: ${GITHUB_WORKSPACE}/repository/build/host/outputs/repo/com/example/ci_test/flutter_release/1.0/flutter_release-1.0.aar
+            retention-days: 1
+
