@@ -33,10 +33,11 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           flutter build aar
+          pwd
 
       - uses: actions/upload-artifact@v3.1.1
         with: 
           name: aar
-          path: ${GITHUB_WORKSPACE}\repository\build\host\outputs\repo\com\example\ci_test\flutter_release\1.0\flutter_release-1.0.aar
+          path: ${GITHUB_WORKSPACE}/repository/build/host/outputs/repo/*
           retention-days: 1
 
