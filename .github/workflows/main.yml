@@ -32,7 +32,7 @@ jobs:
       - name: Run flutter build
         run: flutter build aar
 
-      - uses: actions/upload-artifact@1.0.5
+      - uses: actions/upload-artifact@v3.1.1
         with: 
           name: aar
           path: ${GITHUB_WORKSPACE}/repository/build/host/outputs/repo/com/example/ci_test/flutter_release/1.0/flutter_release-1.0.aar
