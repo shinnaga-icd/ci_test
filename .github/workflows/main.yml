@@ -24,18 +24,14 @@ jobs:
       - name: Run flutter doctor
         run: flutter doctor
         
-      - name: Run flutter pub get
-        run: |
-          cd ${GITHUB_WORKSPACE}/repository
-          flutter pub get
-
       - name: Run flutter build
         run: |
           cd ${GITHUB_WORKSPACE}/repository
-          flutter build aar
+          flutter build aar --no-debug --no-profile --pub
 
       - uses: actions/upload-artifact@v3.1.1
         with: 
           name: aar
+          # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
           path: ${{ github.workspace }}/repository/build/host/outputs/repo/com/example/ci_test/*
-          # retention-days: 1
+          retention-days: 1
