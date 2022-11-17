@@ -1,0 +1,30 @@
+name: Install Flutter
+
+on:
+  push:
+    branches:
+        - release/*
+
+jobs:
+  build:
+      runs-on: ubuntu-latest
+      timeout-minutes: 15
+      
+      steps:
+      
+      - uses: actions/checkout@v2
+        with:
+          path: 'repository'
+          
+      - name: Install Flutter
+        uses: britannio/action-install-flutter@v1.1
+        with:
+          version: 3.0.4
+
+      - name: Run flutter doctor
+        run: flutter doctor
+        
+      - name: Run flutter pub get
+        run: |
+          cd ${GITHUB_WORKSPACE}/repository
+          flutter pub get
