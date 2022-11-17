@@ -34,7 +34,7 @@ jobs:
           cd ${GITHUB_WORKSPACE}/repository
           flutter build aar
 
-      - uses: actions/upload-artifact@v3.1.1
+      - uses: actions/upload-artifact@v1
         with: 
           name: aar
           # path: /home/runner/work/ci_test/ci_test/repository/build/host/outputs/repo/com/example/ci_test/*
