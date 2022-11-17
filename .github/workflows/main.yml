@@ -37,5 +37,6 @@ jobs:
       - uses: actions/upload-artifact@v3.1.1
         with: 
           name: aar
-          path: /home/runner/work/ci_test/ci_test/repository/build/host/outputs/repo/com/example/ci_test/*
+          # path: /home/runner/work/ci_test/ci_test/repository/build/host/outputs/repo/com/example/ci_test/*
+          path: $GITHUB_WORKSPACE/repository/build/host/outputs/repo/com/example/ci_test/*
           retention-days: 1
