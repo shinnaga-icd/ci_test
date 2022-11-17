@@ -38,5 +38,5 @@ jobs:
         with: 
           name: aar
           # path: /home/runner/work/ci_test/ci_test/repository/build/host/outputs/repo/com/example/ci_test/*
-          path: $GITHUB_WORKSPACE/repository/build/host/outputs/repo/com/example/ci_test/*
-          retention-days: 1
+          path: ${{ github.workspace }}/repository/build/host/outputs/repo/com/example/ci_test/*
+          # retention-days: 1
