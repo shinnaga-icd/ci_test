@@ -33,6 +33,8 @@ jobs:
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           flutter build aar
+          sudo apt install -y tree
+          tree
 
       - uses: actions/upload-artifact@v3.1.1
         with: 
