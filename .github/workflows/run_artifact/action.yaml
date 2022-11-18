@@ -9,12 +9,7 @@ runs:
   steps:
       - run: |
           cd ${GITHUB_WORKSPACE}/repository
-          sudo apt install -y tree
-          tree
-          flutter build aar --no-debug --no-profile --pub flavor=${{ inputs.flavor }}
-          sudo apt install -y tree
-          pwd
-          tree
+          flutter build aar --no-debug --no-profile --pub --dart-define flavor=${{ inputs.flavor }}
         shell: bash
 
       - uses: actions/upload-artifact@v3.1.1
