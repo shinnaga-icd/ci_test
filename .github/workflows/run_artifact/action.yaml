@@ -5,6 +5,7 @@ inputs:
   flavor:
     required: true
 runs:
+  using: 'composite'
   steps:
       - run: |
           cd ${GITHUB_WORKSPACE}/repository
