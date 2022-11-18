@@ -25,11 +25,11 @@ jobs:
         run: flutter doctor
 
       - name: flutter build and create artifact
-        uses: repository/.github/workflows/run_artifact/
+        uses: ./repository/.github/workflows/run_artifact/
         with:
           flavor: 'stg'
 
       - name: flutter build and create artifact
-        uses: repository/.github/workflows/run_artifact/
+        uses: ./repository/.github/workflows/run_artifact/
         with:
           flavor: 'prod'
