@@ -1,0 +1,19 @@
+name: "Flutter module create artifact"
+description: "Flutter moduleのビルドとアーティファクト作成を実行、呼び出し時はFlutter Install済みであること"
+
+inputs:
+  flavor:
+    required: true
+runs:
+  steps:
+      - name: Run flutter build
+        run: |
+          cd ${GITHUB_WORKSPACE}/repository
+          flutter build aar --no-debug --no-profile --pub flavor=${{ inputs.flavors }}
+
+      - uses: actions/upload-artifact@v3.1.1
+        with: 
+          name: anrdoid_${{ inputs.flavors }}
+          # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
+          path: ${{ github.workspace }}/repository/build/host/outputs/repo/com/example/ci_test/*
+          retention-days: 1
