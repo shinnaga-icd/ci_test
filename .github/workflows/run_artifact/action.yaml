@@ -9,6 +9,8 @@ runs:
   steps:
       - run: |
           cd ${GITHUB_WORKSPACE}/repository
+          sudo apt install -y tree
+          tree
           flutter build aar --no-debug --no-profile --pub flavor=${{ inputs.flavor }}
         shell: bash
 
