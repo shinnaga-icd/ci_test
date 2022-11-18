@@ -6,10 +6,10 @@ inputs:
     required: true
 runs:
   steps:
-      - name: Run flutter build
-        run: |
+      - run: |
           cd ${GITHUB_WORKSPACE}/repository
           flutter build aar --no-debug --no-profile --pub flavor=${{ inputs.flavors }}
+        shell: bash
 
       - uses: actions/upload-artifact@v3.1.1
         with: 
