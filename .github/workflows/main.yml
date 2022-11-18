@@ -30,6 +30,6 @@ jobs:
           flavor: 'stg'
 
       - name: flutter build and create artifact
-        uses: ./run_artifact
+        uses: ./.github/workflows/run_artifact
         with:
           flavor: 'prod'
