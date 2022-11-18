@@ -23,9 +23,9 @@ jobs:
 
       - name: Run flutter doctor
         run: |
-        flutter doctor
-        sudo apt install -y tree
-        tree
+          flutter doctor
+          sudo apt install -y tree
+          tree
 
       - name: flutter build and create artifact
         uses: ./repository/.github/workflows/run_artifact/
