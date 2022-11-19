@@ -6,7 +6,7 @@ on:
         - release/*
 
 jobs:
-  build:
+  ios-release:
       runs-on: macOS-11
       timeout-minutes: 30
       
