@@ -1,4 +1,4 @@
-name: Install Flutter
+name: Release for android
 
 on:
   push:
@@ -25,12 +25,12 @@ jobs:
         run: |
           flutter doctor
 
-      - name: flutter build and create artifact
-        uses: ./repository/.github/workflows/run_artifact
+      - name: flutter build and create artifact 'stg'
+        uses: ./repository/.github/workflows/create_artifact_android
         with:
           flavor: 'stg'
 
-      - name: flutter build and create artifact
-        uses: ./repository/.github/workflows/run_artifact
+      - name: flutter build and create artifact 'prod'
+        uses: ./repository/.github/workflows/create_artifact_android
         with:
           flavor: 'prod'

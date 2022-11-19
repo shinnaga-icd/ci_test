@@ -1,0 +1,36 @@
+name: Release for ios
+
+on:
+  push:
+    branches:
+        - release/*
+
+jobs:
+  build:
+      runs-on: macOS-11
+      timeout-minutes: 30
+      
+      steps:
+      
+      - uses: actions/checkout@v2
+        with:
+          path: 'repository'
+          
+      - name: Install Flutter
+        uses: britannio/action-install-flutter@v1.1
+        with:
+          version: 3.0.4
+
+      - name: Run flutter doctor
+        run: |
+          flutter doctor
+
+      - name: flutter build and create artifact 'stg'
+        uses: ./repository/.github/workflows/create_artifact_android
+        with:
+          flavor: 'stg'
+
+      - name: flutter build and create artifact 'prod'
+        uses: ./repository/.github/workflows/create_artifact_android
+        with:
+          flavor: 'prod'

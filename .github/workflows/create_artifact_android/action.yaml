@@ -1,4 +1,4 @@
-name: "Flutter module create artifact"
+name: "Flutter module create artifact for android"
 description: "Flutter moduleのビルドとアーティファクト作成を実行、呼び出し時はFlutter Install済みであること"
 
 inputs:
@@ -7,12 +7,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - run: |
+      - name: flutter build
+        run: |
           cd ${GITHUB_WORKSPACE}/repository
-          flutter build aar --no-debug --no-profile --pub --dart-define flavor=${{ inputs.flavor }}
+          flutter build aar --pub --dart-define flavor=${{ inputs.flavor }}
         shell: bash
 
-      - uses: actions/upload-artifact@v3.1.1
+      - name: upload artifact
+        uses: actions/upload-artifact@v3.1.1
         with: 
           name: anrdoid_${{ inputs.flavor }}
           # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
