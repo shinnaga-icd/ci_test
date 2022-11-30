@@ -25,6 +25,20 @@ jobs:
         run: |
           flutter doctor
 
+      - name: Run flutter pub get
+        run: |
+          flutter pub get
+
+      - name: Cache flutter-dir and packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./repository/*
+            ~/.packages
+          key: packages-${{ hashFiles('./repository/pubspec.lock') }}
+          restore-keys: |
+            packages-
+
       - name: flutter build and create artifact 'stg'
         uses: ./repository/.github/workflows/create_artifact_ios
         with:
@@ -34,3 +48,12 @@ jobs:
         uses: ./repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'prod'
+
+      - name: Cache build
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./repository/build/*
+          key: build-${{ hashFiles('./repository/pubspec.lock') }}
+          restore-keys: |
+            build-

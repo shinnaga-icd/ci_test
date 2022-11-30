@@ -10,7 +10,7 @@ runs:
       - name: flutter build
         run: |
           cd ${GITHUB_WORKSPACE}/repository
-          flutter build ios-framework --cocoapods --pub --dart-define flavor=${{ inputs.flavor }}
+          flutter build ios-framework --cocoapods --dart-define flavor=${{ inputs.flavor }}
         shell: bash
 
       - name: upload artifact
