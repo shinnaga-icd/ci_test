@@ -27,6 +27,7 @@ jobs:
 
       - name: Run flutter pub get
         run: |
+          cd repository
           flutter pub get
 
       - name: Cache flutter-dir and packages
