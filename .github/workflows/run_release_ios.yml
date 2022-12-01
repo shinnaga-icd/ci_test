@@ -69,11 +69,11 @@ jobs:
         with:
           flavor: 'prod'
 
-      # - name: Cache build prod
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       ./repository/build/*
-      #     key: build-prod-${{ hashFiles('./repository/pubspec.lock') }}
-      #     restore-keys: |
-      #       build-prod-
+      - name: Cache build prod
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./repository/build/*
+          key: build-prod-${{ hashFiles('./repository/pubspec.lock') }}
+          restore-keys: |
+            build-prod-
