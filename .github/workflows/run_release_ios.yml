@@ -55,14 +55,14 @@ jobs:
         with:
           flavor: 'stg'
 
-      # - name: Cache build stg
-      #   uses: actions/cache@v2
-      #   with:
-      #     path: |
-      #       ./repository/build/*
-      #     key: build-stg-${{ hashFiles('./repository/pubspec.lock') }}
-      #     restore-keys: |
-      #       build-stg-
+      - name: Cache build stg
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./repository/build/*
+          key: build-stg-${{ hashFiles('./repository/pubspec.lock') }}
+          restore-keys: |
+            build-stg-
 
       - name: flutter build and create artifact 'prod'
         uses: ./repository/.github/workflows/create_artifact_ios
