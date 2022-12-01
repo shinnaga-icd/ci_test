@@ -16,10 +16,9 @@ jobs:
         with:
           path: 'repository'
           
-      - name: Install Flutter
-        uses: britannio/action-install-flutter@v1.1
-        with:
-          version: 3.0.4
+      - name: Setup Flutter
+        run: |
+          ${GITHUB_WORKSPACE}/repository/.github/workflows/scripts/install-flutter.sh
 
       - name: Run flutter doctor
         run: |
@@ -45,16 +44,25 @@ jobs:
         with:
           flavor: 'stg'
 
+      - name: Cache build stg
+        uses: actions/cache@v2
+        with:
+          path: |
+            ./repository/build/*
+          key: build-stg-${{ hashFiles('./repository/pubspec.lock') }}
+          restore-keys: |
+            build-
+
       - name: flutter build and create artifact 'prod'
         uses: ./repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'prod'
 
-      - name: Cache build
+      - name: Cache build prod
         uses: actions/cache@v2
         with:
           path: |
             ./repository/build/*
-          key: build-${{ hashFiles('./repository/pubspec.lock') }}
+          key: build-prod-${{ hashFiles('./repository/pubspec.lock') }}
           restore-keys: |
             build-
