@@ -56,7 +56,7 @@ jobs:
           flavor: 'stg'
 
       - name: Cache build stg
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./repository/build/*
@@ -70,7 +70,7 @@ jobs:
           flavor: 'prod'
 
       - name: Cache build prod
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./repository/build/*
