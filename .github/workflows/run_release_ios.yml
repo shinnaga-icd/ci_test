@@ -20,9 +20,20 @@ jobs:
         run: |
           ${GITHUB_WORKSPACE}/repository/.github/workflows/scripts/install-flutter.sh
 
+      - name: Cache flutter install
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./repository/*
+          key: install-${{ hashFiles('./repository/.github/workflows/scripts/install-flutter.sh') }}
+          restore-keys: |
+            install-
+
       - name: Run flutter doctor
         run: |
           flutter doctor
+          cd repository
+          flutter pub get
 
       - name: Run flutter pub get
         run: |
@@ -51,7 +62,7 @@ jobs:
             ./repository/build/*
           key: build-stg-${{ hashFiles('./repository/pubspec.lock') }}
           restore-keys: |
-            build-
+            build-stg-
 
       - name: flutter build and create artifact 'prod'
         uses: ./repository/.github/workflows/create_artifact_ios
@@ -65,4 +76,4 @@ jobs:
             ./repository/build/*
           key: build-prod-${{ hashFiles('./repository/pubspec.lock') }}
           restore-keys: |
-            build-
+            build-prod-
