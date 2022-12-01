@@ -40,15 +40,14 @@ jobs:
           cd repository
           flutter pub get
 
-      # - name: Cache flutter-dir and packages
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: |
-      #       ./repository/*
-      #       ~/.packages
-      #     key: packages-${{ hashFiles('./repository/pubspec.lock') }}
-      #     restore-keys: |
-      #       packages-
+      - name: Cache flutter-dir and packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+          key: packages-${{ hashFiles('./repository/pubspec.lock') }}
+          restore-keys: |
+            packages-
 
       - name: flutter build and create artifact 'stg'
         uses: ./repository/.github/workflows/create_artifact_ios
@@ -60,6 +59,8 @@ jobs:
         with:
           path: |
             ./repository/build/*
+            ./repository/.ios/*
+            ~/.pub-cache
           key: build-stg-${{ hashFiles('./repository/pubspec.lock') }}
           restore-keys: |
             build-stg-
@@ -74,6 +75,8 @@ jobs:
         with:
           path: |
             ./repository/build/*
+            ./repository/.ios/*
+            ~/.pub-cache
           key: build-prod-${{ hashFiles('./repository/pubspec.lock') }}
           restore-keys: |
             build-prod-
