@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Test a',
       theme: ThemeData(
-        primarySwatch: Colors.yellow,
+        primarySwatch: Colors.deepOrange,
       ),
       home: const MyHomePage(title: 'Test'),
     );
