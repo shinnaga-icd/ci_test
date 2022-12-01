@@ -12,7 +12,7 @@ jobs:
       
       steps:
       
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           path: 'repository'
           
@@ -31,7 +31,7 @@ jobs:
           flutter pub get
 
       - name: Cache flutter-dir and packages
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             ./repository/*
