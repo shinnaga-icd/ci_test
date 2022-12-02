@@ -17,9 +17,9 @@ runs:
             ${{ github.workspace }}/repository/.ios/*
             ${{ runner.tool_cache }}/.pub-cache
             ${{ runner.tool_cache }}/.cocoapods
-          key: build-${{ inputs.flavor }}-${{ hashFiles('${{ github.workspace }}/repository/pubspec.lock') }}
+          key: build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
           restore-keys: |
-            build-${{ inputs.flavor }}-${{ hashFiles('${{ github.workspace }}/repository/pubspec.lock') }}
+            build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
             build-${{ inputs.flavor }}-
             build-
 
