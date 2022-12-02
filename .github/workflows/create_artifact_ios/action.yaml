@@ -9,17 +9,30 @@ runs:
   steps:
       - name: confirm paths
         run: |
-          ls -la ~/.pub-cache
-          ls -la ~/.cocoapods
-          ls -la ${{ github.workspace }}/repository/build/*
-          ls -la ${{ github.workspace }}/repository/.dart_tool
-          ls -la ${{ github.workspace }}/repository/.ios/*
+          brew install tree
+          echo "tree ~/"
+          tree ~/ -d
+          echo "tree repo"
+          tree ~/ ${{ github.workspace }}/repository/ -d
+          echo "tree tool_cache"
+          tree ${{ runner.tool_cache }}/
         shell: bash
 
       - name: flutter build
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           flutter build ios-framework --cocoapods --dart-define flavor=${{ inputs.flavor }}
+        shell: bash
+
+      - name: confirm paths
+        run: |
+          brew install tree
+          echo "tree ~/"
+          tree ~/ -d
+          echo "tree repo"
+          tree ~/ ${{ github.workspace }}/repository/ -d
+          echo "tree tool_cache"
+          tree ${{ runner.tool_cache }}/
         shell: bash
 
       - name: Cache build
