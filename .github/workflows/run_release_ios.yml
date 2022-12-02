@@ -28,7 +28,7 @@ jobs:
         id: flutter_setup
         uses: actions/cache@v3
         with:
-          path: ${{ env.flutter_path }}/
+          path: ${{ env.flutter_path }}
           key: flutter-${{ env.flutter_ver }}
 
       - name: Run flutter doctor
