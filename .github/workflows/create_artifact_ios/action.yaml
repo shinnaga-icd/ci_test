@@ -13,6 +13,20 @@ runs:
           flutter build ios-framework --cocoapods --dart-define flavor=${{ inputs.flavor }}
         shell: bash
 
+      - name: Cache build
+        uses: actions/cache@v3
+        with:
+          path: |
+            ./repository/build/*
+            ./repository/.dart_tool
+            ./repository/.ios/*
+            ~/.pub-cache
+            ~/.cocoapods
+          key: build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
+          restore-keys: |
+            build-${{ inputs.flavor }}-
+            build-
+
       - name: upload artifact
         uses: actions/upload-artifact@v3.1.1
         with: 
