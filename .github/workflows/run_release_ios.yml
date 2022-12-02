@@ -57,7 +57,7 @@ jobs:
     strategy:
       matrix:
         target: [stg, prod]
-    uses: ./repository/.github/workflows/create_artifact_ios/action.yaml@release/3
+    uses: ./repository/.github/workflows/create_artifact_ios.yaml@release/3
     with:
       flavor: ${{ matrix.target }}
           
