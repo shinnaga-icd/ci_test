@@ -12,14 +12,6 @@ jobs:
       
       steps:
       
-      - name: confirm paths
-        run: |
-          ls -la ${{ github.workspace }}/repository/build/*
-          ls -la ${{ github.workspace }}/repository/.dart_tool
-          ls -la ${{ github.workspace }}/repository/.ios/*
-          ls -la ~/.pub-cache
-          ls -la ~/.cocoapods
-
       - uses: actions/checkout@v3
         with:
           path: 'repository'
