@@ -11,7 +11,7 @@ runs:
       - name: flutter build
         run: |
           cd ${{ github.workspace }}/repository
-          flutter build ios-framework --cocoapods --dart-define flavor=${{ inputs.flavor }}
+          flutter build ios-framework --cocoapods --output=${{ github.workspace }}/repository/build_${{ inputs.flavor }} --dart-define flavor=${{ inputs.flavor }}
         shell: bash
 
       - name: upload artifact
@@ -19,5 +19,5 @@ runs:
         with: 
           name: ios_${{ inputs.flavor }}
           # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
-          path: ${{ github.workspace }}/repository/build/ios/framework/*
+          path: ${{ github.workspace }}/repository/build_${{ inputs.flavor }}
           retention-days: 1

@@ -29,10 +29,18 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
+            ${{ env.flutter_path }}/bin/cache
+          key: flutter-setup-${{ env.flutter_ver }}
+
+      - name: Cache flutter packages
+        id: flutter_packages
+        uses: actions/cache@v3
+        with:
+          path: |
+            ${{ github.workspace }}/repository/.packages
             ${{ env.flutter_path }}/packages
             ${{ env.flutter_path }}/.pub-cache
-            ${{ env.flutter_path }}/bin/cache
-          key: flutter-${{ env.flutter_ver }}
+          key: flutter-setup-${{ env.flutter_ver }}-${{ hashFiles('./repository/pubspec.lock') }}
 
       - name: Run flutter doctor
         if: steps.flutter_setup.outputs.cache-hit != 'true'
@@ -40,14 +48,23 @@ jobs:
           flutter doctor
 
       - name: Run flutter pub get
+        if: steps.flutter_packages.outputs.cache-hit != 'true'
         run: |
           cd repository
           flutter pub get
 
-      - name: flutter build and create artifact 'stg'
+      - name: flutter build and create artifact
+        strategy:
+          matrix:
+            target: [stg, prod]
         uses: ./repository/.github/workflows/create_artifact_ios
         with:
-          flavor: 'stg'
+          flavor: ${{ matrix.target }}
+          
+      # - name: flutter build and create artifact 'stg'
+      #   uses: ./repository/.github/workflows/create_artifact_ios
+      #   with:
+      #     flavor: 'stg'
 
       # - name: flutter build and create artifact 'prod'
       #   uses: ./repository/.github/workflows/create_artifact_ios
