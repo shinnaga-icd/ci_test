@@ -7,6 +7,14 @@ inputs:
 runs:
   using: 'composite'
   steps:
+      - name: confirm paths
+        run: |
+          ls -la ./repository/build/*
+          ls -la ./repository/.dart_tool
+          ls -la ./repository/.ios/*
+          ls -la ~/.pub-cache
+          ls -la ~/.cocoapods
+
       - name: flutter build
         run: |
           cd ${GITHUB_WORKSPACE}/repository

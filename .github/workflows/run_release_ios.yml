@@ -12,6 +12,14 @@ jobs:
       
       steps:
       
+      - name: confirm paths
+        run: |
+          ls -la ./repository/build/*
+          ls -la ./repository/.dart_tool
+          ls -la ./repository/.ios/*
+          ls -la ~/.pub-cache
+          ls -la ~/.cocoapods
+
       - uses: actions/checkout@v3
         with:
           path: 'repository'
