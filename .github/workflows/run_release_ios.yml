@@ -7,7 +7,7 @@ on:
 
 env:
   flutter_ver: 3.0.4
-  flutter_path: ${GITHUB_WORKSPACE}/_flutter
+  flutter_path: ${{ github.workspace }}/_flutter
 
 jobs:
   ios-release:
@@ -22,7 +22,7 @@ jobs:
           
       - name: Setup Flutter
         run: |
-          ${GITHUB_WORKSPACE}/repository/.github/workflows/scripts/install-flutter.sh -v ${{ env.flutter_ver }} -p ${{ env.flutter_path }}
+          ${{ github.workspace }}/repository/.github/workflows/scripts/install-flutter.sh -v ${{ env.flutter_ver }} -p ${{ env.flutter_path }}
 
       - name: Cache flutter setup
         id: flutter_setup
