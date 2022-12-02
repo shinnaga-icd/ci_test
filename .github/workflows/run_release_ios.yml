@@ -57,9 +57,11 @@ jobs:
     strategy:
       matrix:
         target: [stg, prod]
-    uses: ./repository/.github/workflows/create_artifact_ios
-    with:
-      flavor: ${{ matrix.target }}
+    steps:
+    - run: |
+          cd ${{ github.workspace }}/repository
+          flutter build ios-framework --cocoapods --output=${{ github.workspace }}/repository/build_${{ matrix.target }} --dart-define flavor=${{ matrix.target }}
+    - uses: actions/upload-artifact@v3.1.1
           
       # - name: flutter build and create artifact 'stg'
       #   uses: ./repository/.github/workflows/create_artifact_ios
