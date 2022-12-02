@@ -5,6 +5,10 @@ on:
     branches:
         - release/*
 
+env:
+  flutter_ver: 3.0.4
+  flutter_path: ${GITHUB_WORKSPACE}/_flutter
+
 jobs:
   ios-release:
       runs-on: macOS-11
@@ -18,9 +22,17 @@ jobs:
           
       - name: Setup Flutter
         run: |
-          ${GITHUB_WORKSPACE}/repository/.github/workflows/scripts/install-flutter.sh
+          ${GITHUB_WORKSPACE}/repository/.github/workflows/scripts/install-flutter.sh -v ${{ env.flutter_ver }} -p ${{ env.flutter_path }}
+
+      - name: Cache flutter setup
+        id: flutter_setup
+        uses: actions/cache@v3
+        with:
+          path: ${{ env.flutter_path }}/
+          key: flutter-${{ env.flutter_ver }}
 
       - name: Run flutter doctor
+        if: steps.flutter_setup.outputs.cache-hit != 'true'
         run: |
           flutter doctor
 
@@ -29,12 +41,12 @@ jobs:
           cd repository
           flutter pub get
 
-      - name: flutter build and create artifact 'stg'
-        uses: ./repository/.github/workflows/create_artifact_ios
-        with:
-          flavor: 'stg'
+      # - name: flutter build and create artifact 'stg'
+      #   uses: ./repository/.github/workflows/create_artifact_ios
+      #   with:
+      #     flavor: 'stg'
 
-      - name: flutter build and create artifact 'prod'
-        uses: ./repository/.github/workflows/create_artifact_ios
-        with:
-          flavor: 'prod'
+      # - name: flutter build and create artifact 'prod'
+      #   uses: ./repository/.github/workflows/create_artifact_ios
+      #   with:
+      #     flavor: 'prod'
