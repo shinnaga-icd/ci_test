@@ -14,9 +14,9 @@ jobs:
       
       - name: confirm paths
         run: |
-          ls -la ./repository/build/*
-          ls -la ./repository/.dart_tool
-          ls -la ./repository/.ios/*
+          ls -la ${{ github.workspace }}/repository/build/*
+          ls -la ${{ github.workspace }}/repository/.dart_tool
+          ls -la ${{ github.workspace }}/repository/.ios/*
           ls -la ~/.pub-cache
           ls -la ~/.cocoapods
 
