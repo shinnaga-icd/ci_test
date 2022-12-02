@@ -14,6 +14,7 @@ runs:
           ls -la ${{ github.workspace }}/repository/.ios/*
           ls -la ~/.pub-cache
           ls -la ~/.cocoapods
+        shell: bash
 
       - name: flutter build
         run: |
