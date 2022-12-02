@@ -7,32 +7,10 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - name: confirm paths
-        run: |
-          brew install tree
-          echo "tree ~/"
-          tree ~/ -d
-          echo "tree repo"
-          tree ~/ ${{ github.workspace }}/repository/ -d
-          echo "tree tool_cache"
-          tree ${{ runner.tool_cache }}/
-        shell: bash
-
       - name: flutter build
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           flutter build ios-framework --cocoapods --dart-define flavor=${{ inputs.flavor }}
-        shell: bash
-
-      - name: confirm paths
-        run: |
-          brew install tree
-          echo "tree ~/"
-          tree ~/ -d
-          echo "tree repo"
-          tree ~/ ${{ github.workspace }}/repository/ -d
-          echo "tree tool_cache"
-          tree ${{ runner.tool_cache }}/
         shell: bash
 
       - name: Cache build
@@ -42,8 +20,8 @@ runs:
             ./repository/build/*
             ./repository/.dart_tool
             ./repository/.ios/*
-            ~/.pub-cache
-            ~/.cocoapods
+            ${{ runner.tool_cache }}/.pub-cache
+            ${{ runner.tool_cache }}/.cocoapods
           key: build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
           restore-keys: |
             build-${{ inputs.flavor }}-
