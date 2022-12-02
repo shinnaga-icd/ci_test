@@ -44,11 +44,11 @@ jobs:
           flutter pub get
 
       - name: flutter build and create artifact 'stg'
-        uses: ./repository/.github/workflows/create_artifact_ios
+        uses: ${{ github.workspace }}/repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'stg'
 
       - name: flutter build and create artifact 'prod'
-        uses: ./repository/.github/workflows/create_artifact_ios
+        uses: ${{ github.workspace }}/repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'prod'

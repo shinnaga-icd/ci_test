@@ -4,6 +4,10 @@ description: "Flutter moduleのiosビルドとアーティファクト作成を�
 inputs:
   flavor:
     required: true
+
+env:
+  build_path: ${{ github.workspace }}/repository/build-${{ inputs.flavor }}
+
 runs:
   using: 'composite'
   steps:
@@ -11,21 +15,21 @@ runs:
         uses: actions/cache@v3
         with:
           path: |
-            ./repository/build/*
-            ./repository/.dart_tool
-            ./repository/.ios/*
+            ${{ env.build_path }}/*
+            ${{ github.workspace }}/repository/.dart_tool
+            ${{ github.workspace }}/repository/.ios/*
             ${{ runner.tool_cache }}/.pub-cache
             ${{ runner.tool_cache }}/.cocoapods
-          key: build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
+          key: build-${{ inputs.flavor }}-${{ hashFiles('${{ github.workspace }}/repository/pubspec.lock') }}
           restore-keys: |
-            build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
+            build-${{ inputs.flavor }}-${{ hashFiles('${{ github.workspace }}/repository/pubspec.lock') }}
             build-${{ inputs.flavor }}-
             build-
 
       - name: flutter build
         run: |
-          cd ${GITHUB_WORKSPACE}/repository
-          flutter build ios-framework --cocoapods --dart-define flavor=${{ inputs.flavor }}
+          cd ${{ github.workspace }}/repository
+          flutter build ios-framework --cocoapods --output=${{ env.build_path }} --dart-define flavor=${{ inputs.flavor }}
         shell: bash
 
       - name: upload artifact
@@ -33,5 +37,5 @@ runs:
         with: 
           name: ios_${{ inputs.flavor }}
           # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
-          path: ${{ github.workspace }}/repository/build/ios/framework/*
+          path: ${{ env.build_path }}/*
           retention-days: 1
