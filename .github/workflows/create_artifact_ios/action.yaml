@@ -9,11 +9,11 @@ runs:
   steps:
       - name: confirm paths
         run: |
+          ls -la ~/.pub-cache
+          ls -la ~/.cocoapods
           ls -la ${{ github.workspace }}/repository/build/*
           ls -la ${{ github.workspace }}/repository/.dart_tool
           ls -la ${{ github.workspace }}/repository/.ios/*
-          ls -la ~/.pub-cache
-          ls -la ~/.cocoapods
         shell: bash
 
       - name: flutter build
