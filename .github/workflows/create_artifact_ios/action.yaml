@@ -8,25 +8,10 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - name: Cache build
-        uses: actions/cache@v3
-        with:
-          path: |
-            ${{ github.workspace }}/repository/build-${{ inputs.flavor }}/*
-            ${{ github.workspace }}/repository/.dart_tool
-            ${{ github.workspace }}/repository/.ios/*
-            ${{ runner.tool_cache }}/.pub-cache
-            ${{ runner.tool_cache }}/.cocoapods
-          key: build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
-          restore-keys: |
-            build-${{ inputs.flavor }}-${{ hashFiles('./repository/pubspec.lock') }}
-            build-${{ inputs.flavor }}-
-            build-
-
       - name: flutter build
         run: |
           cd ${{ github.workspace }}/repository
-          flutter build ios-framework --cocoapods --output=${{ github.workspace }}/repository/build-${{ inputs.flavor }} --dart-define flavor=${{ inputs.flavor }}
+          flutter build ios-framework --cocoapods --dart-define flavor=${{ inputs.flavor }}
         shell: bash
 
       - name: upload artifact
@@ -34,5 +19,5 @@ runs:
         with: 
           name: ios_${{ inputs.flavor }}
           # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
-          path: ${{ github.workspace }}/repository/build-${{ inputs.flavor }}/*
+          path: ${{ github.workspace }}/repository/build/ios/framework/*
           retention-days: 1
