@@ -23,8 +23,6 @@ jobs:
       - name: Run flutter doctor
         run: |
           flutter doctor
-          cd repository
-          flutter pub get
 
       - name: Run flutter pub get
         run: |
