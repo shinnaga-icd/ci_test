@@ -12,9 +12,6 @@ do
   esac
 done
 
-echo $VER
-echo $SET_PATH
-
 sudo apt update && sudo apt upgrade -y && sudo apt install -y ninja-build libgtk-3-dev
 
 # 参考
