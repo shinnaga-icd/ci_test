@@ -22,7 +22,7 @@ jobs:
         
     - name: Setup Flutter
       run: |
-        ${{ github.workspace }}/repository/.github/workflows/scripts/install-flutter.sh -v ${{ env.flutter_ver }} -p ${{ env.flutter_path }}
+        ${{ github.workspace }}/repository/.github/workflows/scripts/install-flutter.sh
 
     - name: Cache flutter setup
       id: flutter_setup
