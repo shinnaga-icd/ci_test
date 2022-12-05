@@ -21,3 +21,4 @@ runs:
           # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
           path: ${{ github.workspace }}/repository/build_${{ inputs.flavor }}
           retention-days: 1
+

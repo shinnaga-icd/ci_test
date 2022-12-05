@@ -53,22 +53,12 @@ jobs:
         cd repository
         flutter pub get
 
-  build:
-    strategy:
-      matrix:
-        target: [stg, prod]
-    steps:
-    - run: |
-          cd ${{ github.workspace }}/repository
-          flutter build ios-framework --cocoapods --output=${{ github.workspace }}/repository/build_${{ matrix.target }} --dart-define flavor=${{ matrix.target }}
-    - uses: actions/upload-artifact@v3.1.1
-          
-      # - name: flutter build and create artifact 'stg'
-      #   uses: ./repository/.github/workflows/create_artifact_ios
-      #   with:
-      #     flavor: 'stg'
+    - name: flutter build and create artifact 'stg'
+      uses: ./repository/.github/workflows/create_artifact_ios
+      with:
+        flavor: 'stg'
 
-      # - name: flutter build and create artifact 'prod'
-      #   uses: ./repository/.github/workflows/create_artifact_ios
-      #   with:
-      #     flavor: 'prod'
+    - name: flutter build and create artifact 'prod'
+      uses: ./repository/.github/workflows/create_artifact_ios
+      with:
+        flavor: 'prod'
