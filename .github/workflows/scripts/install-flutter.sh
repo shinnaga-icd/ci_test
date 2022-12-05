@@ -9,8 +9,8 @@ do
   esac
 done
 
-$VER = ${VER:-3.0.4}
-$PATH = ${PATH:-"$GITHUB_WORKSPACE/_flutter"}
+$VER=${VER:-3.0.4}
+$PATH=${PATH:-"$GITHUB_WORKSPACE/_flutter"}
 
 sudo apt update && sudo apt upgrade -y && sudo apt install -y ninja-build libgtk-3-dev
 
