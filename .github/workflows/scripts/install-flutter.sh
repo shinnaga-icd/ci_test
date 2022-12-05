@@ -1,5 +1,8 @@
 #!/bin/bash
 
+VER=${VER:-3.0.4}
+SET_PATH=${SET_PATH:-"$GITHUB_WORKSPACE/_flutter"}
+
 # 引数処理 v:flutter vesion, p:flutter setup path
 while getopts v:p: OPT
 do
@@ -9,8 +12,8 @@ do
   esac
 done
 
-$VER=${VER:-3.0.4}
-$PATH=${PATH:-"$GITHUB_WORKSPACE/_flutter"}
+echo $VER
+echo $SET_PATH
 
 sudo apt update && sudo apt upgrade -y && sudo apt install -y ninja-build libgtk-3-dev
 
