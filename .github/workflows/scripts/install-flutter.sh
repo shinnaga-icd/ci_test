@@ -1,11 +1,13 @@
 #!/bin/bash
 
 # 引数処理 v:flutter vesion, p:flutter setup path
+VER=3.0.4
+PATH=${{ github.workspace }}/_flutter
 while getopts v:p: OPT
 do
   case $OPT in
-    "v" ) VER="$OPTARG" ;;
-    "p" ) SET_PATH="$OPTARG" ;;
+    "v" ) $VER="$OPTARG" ;;
+    "p" ) $SET_PATH="$OPTARG" ;;
   esac
 done
 
