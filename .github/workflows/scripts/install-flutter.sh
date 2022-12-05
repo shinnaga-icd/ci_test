@@ -7,8 +7,8 @@ SET_PATH=${SET_PATH:-"$GITHUB_WORKSPACE/_flutter"}
 while getopts v:p: OPT
 do
   case $OPT in
-    "v" ) $VER="$OPTARG" ;;
-    "p" ) $SET_PATH="$OPTARG" ;;
+    "v" ) VER="$OPTARG" ;;
+    "p" ) SET_PATH="$OPTARG" ;;
   esac
 done
 
