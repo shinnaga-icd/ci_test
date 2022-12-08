@@ -4,7 +4,11 @@ on:
   push:
     branches:
         - pre-release/*
+          env:
+            test: a
         - release/*
+          env:
+            test: b
 
 env:
   flutter_ver: 3.0.4
@@ -21,20 +25,7 @@ jobs:
         run: |
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
-
-      - name: param set 1
-        if: startsWith(github.ref_name, 'release')
-        id: my_var
-        run: echo "relase dayo!!"
-        
-      - name: param set 2
-        if: startsWith(github.ref_name, 'pre-release')
-        id: my_var
-        run: echo "pre dayo!!"
-        
-      - name: test param
-        run: |
-          echo ${{ steps.my_var.outputs.my_var }}
+          echo &{{ env.test }}
 
     # - uses: actions/checkout@v3
     #   with:
