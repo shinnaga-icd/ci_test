@@ -17,7 +17,13 @@ jobs:
     
     steps:
     - name: test
-      run: echo "test"
+      run: |
+        echo "test"
+        ls -la /Users/runner/work/ci_test/ci_test/
+        ls -la /Users/runner/work/ci_test/ci_test/repository/
+        ls -la /Users/runner/work/ci_test/ci_test/repository/.github/
+        ls -la /Users/runner/work/ci_test/ci_test/repository/.github/workflows/
+        ls -la /Users/runner/work/ci_test/ci_test/repository/.github/workflows/create_artifact_ios/
 
     - name: flutter build and create artifact 'stg'
       if: startsWith(github.ref_name, 'pre-release')
