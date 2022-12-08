@@ -24,17 +24,17 @@ jobs:
 
       - name: param set 1
         if: startsWith(github.ref_name, 'release')
-        env:
-          param: -v
+        id: my_var
+        run: echo "relase dayo!!"
         
       - name: param set 2
         if: startsWith(github.ref_name, 'pre-release')
-        env:
-          param: -h
+        id: my_var
+        run: echo "pre dayo!!"
         
       - name: test param
         run: |
-          brew ${{ env.param }}
+          echo ${{ steps.my_var.outputs.my_var }}
 
     # - uses: actions/checkout@v3
     #   with:
