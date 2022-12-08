@@ -15,15 +15,9 @@ jobs:
     runs-on: macOS-11
     timeout-minutes: 30
     
-    steps:
-    - name: test
-      run: |
-        echo "test"
-        ls -la ${{ github.workspace }}
-        ls -la ${{ github.workspace }}/repository/
-        ls -la ${{ github.workspace }}/repository/.github/
-        ls -la ${{ github.workspace }}/repository/.github/workflows/
-        ls -la ${{ github.workspace }}/repository/.github/workflows/create_artifact_ios/
+    - uses: actions/checkout@v2
+      with:
+        path: 'repository'
 
     - name: flutter build and create artifact 'stg'
       if: startsWith(github.ref_name, 'pre-release')
