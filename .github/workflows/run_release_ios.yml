@@ -19,21 +19,21 @@ jobs:
     - name: test
       run: |
         echo "test"
-        ls -la /Users/runner/work/ci_test/ci_test/
-        ls -la /Users/runner/work/ci_test/ci_test/repository/
-        ls -la /Users/runner/work/ci_test/ci_test/repository/.github/
-        ls -la /Users/runner/work/ci_test/ci_test/repository/.github/workflows/
-        ls -la /Users/runner/work/ci_test/ci_test/repository/.github/workflows/create_artifact_ios/
+        ls -la ${{ github.workspace }}
+        ls -la ${{ github.workspace }}/repository/
+        ls -la ${{ github.workspace }}/repository/.github/
+        ls -la ${{ github.workspace }}/repository/.github/workflows/
+        ls -la ${{ github.workspace }}/repository/.github/workflows/create_artifact_ios/
 
     - name: flutter build and create artifact 'stg'
       if: startsWith(github.ref_name, 'pre-release')
-      uses: ./repository/.github/workflows/create_artifact_ios
+      uses: ${{ github.workspace }}/repository/.github/workflows/create_artifact_ios
       with:
         flavor: 'stg'
         build-target: release
 
     - name: flutter build and create artifact 'aaa'
       if: startsWith(github.ref_name, 'release')
-      uses: ./repository/.github/workflows/create_artifact_ios
+      uses: ${{ github.workspace }}/repository/.github/workflows/create_artifact_ios
       with:
         flavor: 'stg'
