@@ -65,10 +65,18 @@ jobs:
     #     cd repository
     #     flutter pub get
 
-    # - name: flutter build and create artifact 'stg'
-    #   uses: ./repository/.github/workflows/create_artifact_ios
-    #   with:
-    #     flavor: 'stg'
+    - name: flutter build and create artifact 'stg'
+      if: startsWith(github.ref_name, 'pre-release')
+      uses: ./repository/.github/workflows/create_artifact_ios
+      with:
+        flavor: 'stg'
+        build-target: release
+
+    - name: flutter build and create artifact 'stg'
+      if: startsWith(github.ref_name, 'release')
+      uses: ./repository/.github/workflows/create_artifact_ios
+      with:
+        flavor: 'stg'
 
     # - name: flutter build and create artifact 'prod'
     #   uses: ./repository/.github/workflows/create_artifact_ios
