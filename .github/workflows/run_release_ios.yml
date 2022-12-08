@@ -3,6 +3,7 @@ name: Release for ios
 on:
   push:
     branches:
+        - pre-release/*
         - release/*
 
 env:
@@ -16,49 +17,54 @@ jobs:
     
     steps:
     
-    - uses: actions/checkout@v3
-      with:
-        path: 'repository'
+      - name: branch name test
+        run: |
+          echo ${{ github.ref }}
+          echo ${{ github.ref_name }}
+
+    # - uses: actions/checkout@v3
+    #   with:
+    #     path: 'repository'
         
-    - name: Setup Flutter
-      run: |
-        ${{ github.workspace }}/repository/.github/workflows/scripts/install-flutter.sh -v ${{ env.flutter_ver }} -p ${{ env.flutter_path }}
+    # - name: Setup Flutter
+    #   run: |
+    #     ${{ github.workspace }}/repository/.github/workflows/scripts/install-flutter.sh -v ${{ env.flutter_ver }} -p ${{ env.flutter_path }}
 
-    - name: Cache flutter setup
-      id: flutter_setup
-      uses: actions/cache@v3
-      with:
-        path: |
-          ${{ env.flutter_path }}/bin/cache
-        key: flutter-setup-${{ env.flutter_ver }}
+    # - name: Cache flutter setup
+    #   id: flutter_setup
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: |
+    #       ${{ env.flutter_path }}/bin/cache
+    #     key: flutter-setup-${{ env.flutter_ver }}
 
-    - name: Cache flutter packages
-      id: flutter_packages
-      uses: actions/cache@v3
-      with:
-        path: |
-          ${{ github.workspace }}/repository/.packages
-          ${{ env.flutter_path }}/packages
-          ${{ env.flutter_path }}/.pub-cache
-        key: flutter-setup-${{ env.flutter_ver }}-${{ hashFiles('./repository/pubspec.lock') }}
+    # - name: Cache flutter packages
+    #   id: flutter_packages
+    #   uses: actions/cache@v3
+    #   with:
+    #     path: |
+    #       ${{ github.workspace }}/repository/.packages
+    #       ${{ env.flutter_path }}/packages
+    #       ${{ env.flutter_path }}/.pub-cache
+    #     key: flutter-setup-${{ env.flutter_ver }}-${{ hashFiles('./repository/pubspec.lock') }}
 
-    - name: Run flutter doctor
-      if: steps.flutter_setup.outputs.cache-hit != 'true'
-      run: |
-        flutter doctor
+    # - name: Run flutter doctor
+    #   if: steps.flutter_setup.outputs.cache-hit != 'true'
+    #   run: |
+    #     flutter doctor
 
-    - name: Run flutter pub get
-      if: steps.flutter_packages.outputs.cache-hit != 'true'
-      run: |
-        cd repository
-        flutter pub get
+    # - name: Run flutter pub get
+    #   if: steps.flutter_packages.outputs.cache-hit != 'true'
+    #   run: |
+    #     cd repository
+    #     flutter pub get
 
-    - name: flutter build and create artifact 'stg'
-      uses: ./repository/.github/workflows/create_artifact_ios
-      with:
-        flavor: 'stg'
+    # - name: flutter build and create artifact 'stg'
+    #   uses: ./repository/.github/workflows/create_artifact_ios
+    #   with:
+    #     flavor: 'stg'
 
-    - name: flutter build and create artifact 'prod'
-      uses: ./repository/.github/workflows/create_artifact_ios
-      with:
-        flavor: 'prod'
+    # - name: flutter build and create artifact 'prod'
+    #   uses: ./repository/.github/workflows/create_artifact_ios
+    #   with:
+    #     flavor: 'prod'

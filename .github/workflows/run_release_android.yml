@@ -3,7 +3,7 @@ name: Release for android
 on:
   push:
     branches:
-        - release/*
+        - release/droid/*
 
 jobs:
   droid-release:

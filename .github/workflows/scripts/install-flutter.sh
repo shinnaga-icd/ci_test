@@ -1,9 +1,10 @@
 #!/bin/bash
 
+# 引数処理 v:flutter vesion, p:flutter setup path
+
 VER=${VER:-3.0.4}
 SET_PATH=${SET_PATH:-"$GITHUB_WORKSPACE/_flutter"}
 
-# 引数処理 v:flutter vesion, p:flutter setup path
 while getopts v:p: OPT
 do
   case $OPT in
