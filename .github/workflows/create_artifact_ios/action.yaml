@@ -7,7 +7,6 @@ inputs:
   build-target:
     default: all
 
-
 runs:
   using: 'composite'
   steps:
@@ -22,12 +21,3 @@ runs:
         run: |
           echo "release build"
         shell: bash
-
-      # - name: upload artifact
-      #   uses: actions/upload-artifact@v3.1.1
-      #   with: 
-      #     name: ios_${{ inputs.flavor }}
-      #     # ${GITHUB_WORKSPACE}は利用不可 https://github.com/actions/upload-artifact/issues/110
-      #     path: ${{ github.workspace }}/repository/build_${{ inputs.flavor }}
-      #     retention-days: 1
-
