@@ -26,7 +26,7 @@ jobs:
         flavor: 'stg'
         build-target: release
 
-    - name: flutter build and create artifact 'stg'
+    - name: flutter build and create artifact 'aaa'
       if: startsWith(github.ref_name, 'release')
       uses: ./repository/.github/workflows/create_artifact_ios
       with:
