@@ -22,10 +22,12 @@ jobs:
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
 
-      - name: param set
+      - name: param set 1
         if: startsWith(github.ref_name, 'release')
         env:
           param: -v
+        
+      - name: param set 2
         if: startsWith(github.ref_name, 'pre-release')
         env:
           param: -h
