@@ -22,6 +22,18 @@ jobs:
           echo ${{ github.ref }}
           echo ${{ github.ref_name }}
 
+      - name: param set
+        if: startsWith(github.ref_name, 'release')
+        env:
+          param: -v
+        if: startsWith(github.ref_name, 'pre-release')
+        env:
+          param: -h
+        
+      - name: test param
+        run: |
+          brew ${{ env.param }}
+
     # - uses: actions/checkout@v3
     #   with:
     #     path: 'repository'
