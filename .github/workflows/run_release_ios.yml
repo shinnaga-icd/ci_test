@@ -15,10 +15,10 @@ jobs:
     runs-on: macOS-11
     timeout-minutes: 30
     steps:
-      - if: github.ref startsWith 'refs/heads/release/'
-        - run: echo 'release branch'
-      - if: github.ref startsWith 'refs/heads/pre-release/'
-        - run: echo 'pre branch'
+    - if: github.ref startsWith 'refs/heads/release/'
+      - run: echo 'release branch'
+    - if: github.ref startsWith 'refs/heads/pre-release/'
+      - run: echo 'pre branch'
 
     # - name: flutter build and create artifact 'stg'
     #   if: startsWith(github.ref_name, 'pre-release')
