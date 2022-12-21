@@ -3,6 +3,7 @@ name: Release for ios
 on:
   push:
     branches:
+        - pre-release/*
         - release/*
 
 env:
@@ -15,7 +16,6 @@ jobs:
     timeout-minutes: 30
     
     steps:
-    
     - uses: actions/checkout@v3
       with:
         path: 'repository'

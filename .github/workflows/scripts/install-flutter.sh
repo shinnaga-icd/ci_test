@@ -1,6 +1,10 @@
 #!/bin/bash
 
 # 引数処理 v:flutter vesion, p:flutter setup path
+
+VER=${VER:-3.0.4}
+SET_PATH=${SET_PATH:-"$GITHUB_WORKSPACE/_flutter"}
+
 while getopts v:p: OPT
 do
   case $OPT in
@@ -8,7 +12,6 @@ do
     "p" ) SET_PATH="$OPTARG" ;;
   esac
 done
-
 
 sudo apt update && sudo apt upgrade -y && sudo apt install -y ninja-build libgtk-3-dev
 
