@@ -16,14 +16,10 @@ jobs:
     timeout-minutes: 30
     
     steps:
-    - uses: actions/checkout@v3
-      with:
-        path: 'repository'
-
-    - if: startsWith(github.ref, 'refs/heads/release/')
-      - run: echo 'release branch'
-    - if: startsWith(github.ref, 'refs/heads/pre-release/')
-      - run: echo 'pre branch'
+      - if: startsWith(github.ref, 'refs/heads/release/')
+        - run: echo 'release branch'
+      - if: startsWith(github.ref, 'refs/heads/pre-release/')
+        - run: echo 'pre branch'
 
     # - name: flutter build and create artifact 'stg'
     #   if: startsWith(github.ref_name, 'pre-release')
