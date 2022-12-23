@@ -20,7 +20,7 @@ runs:
           echo ${{ inputs.flavor }}
         shell: bash
 
-      - if: 'a' == 'release-only'
+      - if: inputs.build-target == 'release-only'
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           echo 'target:release-only'
