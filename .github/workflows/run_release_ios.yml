@@ -17,29 +17,17 @@ jobs:
         with:
           path: 'repository'
           
-      - name: Setup Flutter
-        run: |
-          ${GITHUB_WORKSPACE}/repository/.github/workflows/scripts/install-flutter.sh
-
-      - name: Run flutter doctor
-        run: flutter doctor
-
-      - name: Run flutter pub get
-        run: |
-          cd repository
-          flutter pub get
-
       # pre-release
       - name: create artifact 'stg'
         if: startsWith(github.ref_name, 'pre-release')
-        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        uses: ./repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'stg'
           build-target: release-only
 
       - name: create artifact 'prod'
         if: startsWith(github.ref_name, 'pre-release')
-        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        uses: ./repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'prod'
           build-target: release-only
@@ -47,12 +35,12 @@ jobs:
       # release
       - name: create artifact 'stg'
         if: startsWith(github.ref_name, 'release')
-        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        uses: ./repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'stg'
 
       - name: create artifact 'prod'
         if: startsWith(github.ref_name, 'release')
-        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        uses: ./repository/.github/workflows/create_artifact_ios
         with:
           flavor: 'prod'
