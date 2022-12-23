@@ -1,34 +1,46 @@
-name: Release for ios
+name: release for ios
 
 on:
   push:
     branches:
-        - pre-release/*
         - release/*
-
-env:
-  flutter_ver: 3.0.4
-  flutter_path: ${{ github.workspace }}/_flutter
+        - pre-release/*
 
 jobs:
-  flutter-setup:
-    runs-on: macOS-11
-    timeout-minutes: 30
-    steps:
-    - if: github.ref startsWith 'refs/heads/release/'
-      - run: echo 'release branch'
-    - if: github.ref startsWith 'refs/heads/pre-release/'
-      - run: echo 'pre branch'
+  release-ios:
+      runs-on: macOS-11
+      timeout-minutes: 60
+      
+      steps:
+      
+      - uses: actions/checkout@v2
+        with:
+          path: 'repository'
+          
+      # pre-release
+      - name: create artifact 'stg'
+        if: startsWith(github.ref_name, 'pre-release')
+        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        with:
+          flavor: 'stg'
+          build-target: release-only
 
-    # - name: flutter build and create artifact 'stg'
-    #   if: startsWith(github.ref_name, 'pre-release')
-    #   uses: ./repository/.github/workflows/create_artifact_ios
-    #   with:
-    #     flavor: 'stg'
-    #     build-target: release
+      - name: create artifact 'prod'
+        if: startsWith(github.ref_name, 'pre-release')
+        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        with:
+          flavor: 'prod'
+          build-target: release-only
 
-    # - name: flutter build and create artifact 'aaa'
-    #   if: startsWith(github.ref_name, 'release')
-    #   uses: ./repository/.github/workflows/create_artifact_ios
-    #   with:
-    #     flavor: 'stg'
+      # release
+      - name: create artifact 'stg'
+        if: startsWith(github.ref_name, 'release')
+        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        with:
+          flavor: 'stg'
+
+      - name: create artifact 'prod'
+        if: startsWith(github.ref_name, 'release')
+        uses: ./repository/.github/workflows/reusable/create_artifact_ios
+        with:
+          flavor: 'prod'

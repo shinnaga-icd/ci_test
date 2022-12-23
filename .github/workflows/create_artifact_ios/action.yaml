@@ -1,10 +1,12 @@
-name: "Flutter module create artifact for ios"
-description: "Flutter moduleのiosビルドとアーティファクト作成を実行、呼び出し時はFlutter Install済みであること"
+name: Create Artifact for ios
+description: "ios module buildし、outputをartifactへUpload。 ※事前にFlutter Installが必要"
 
 inputs:
   flavor:
+    description: "envを指定。(stg/dev)"
     required: true
   build-target:
+    description: "ビルドターゲット（all[規定]/release-only）"
     default: all
 
 runs:
@@ -13,11 +15,17 @@ runs:
       - name: flutter build
         if: ${{ inputs.build-target }} == 'all'
         run: |
-          echo "all build"
+          cd ${GITHUB_WORKSPACE}/repository
+          echo 'target:all'
+          echo ${{ inputs.build-target }}
+          echo ${{ inputs.flavor }}
         shell: bash
 
-      - name: flutter build release only
-        if: ${{ inputs.build-target }} == 'release'
+      - name: flutter build
+        if: ${{ inputs.build-target }} == 'release-only'
         run: |
-          echo "release build"
+          cd ${GITHUB_WORKSPACE}/repository
+          echo 'target:release-only'
+          echo ${{ inputs.build-target }}
+          echo ${{ inputs.flavor }}
         shell: bash
