@@ -12,8 +12,7 @@ inputs:
 runs:
   using: 'composite'
   steps:
-      - name: flutter build
-        if: ${{ inputs.build-target }} == 'all'
+      - if: ${{ inputs.build-target }} == 'all'
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           echo 'target:all'
@@ -21,8 +20,7 @@ runs:
           echo ${{ inputs.flavor }}
         shell: bash
 
-      - name: flutter build
-        if: ${{ inputs.build-target }} == 'release-only'
+      - if: ${{ inputs.build-target }} == 'release-only'
         run: |
           cd ${GITHUB_WORKSPACE}/repository
           echo 'target:release-only'
