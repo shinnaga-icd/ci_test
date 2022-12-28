@@ -31,7 +31,7 @@ runs:
         shell: bash
 
       - name: set artifact name
-        run: echo  'artifact-name'$(echo ${{ inputs.flavor }} | sed 's/env\///') >> $GITHUB_ENV 
+        run: echo  'artifact-name='$(echo ${{ inputs.flavor }} | sed 's/env\///') >> $GITHUB_ENV 
         shell: bash
 
       - name: upload artifact
