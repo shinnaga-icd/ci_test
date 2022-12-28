@@ -25,5 +25,6 @@ runs:
           cd ${GITHUB_WORKSPACE}/repository
           echo 'target:release-only'
           echo ${{ inputs.build-target }}
-          echo ${{ inputs.flavor }/a/b }
+          echo ${{ inputs.flavor }}
+          echo $(echo ${{ inputs.flavor }} | sed 's/env\///')
         shell: bash
