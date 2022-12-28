@@ -22,7 +22,7 @@ jobs:
         if: startsWith(github.ref_name, 'pre-release')
         uses: ./repository/.github/workflows/create_artifact_ios
         with:
-          flavor: 'stg'
+          flavor: 'env/test-ci'
           build-target: release-only
 
       - name: create artifact 'prod'
@@ -37,7 +37,7 @@ jobs:
         if: startsWith(github.ref_name, 'release')
         uses: ./repository/.github/workflows/create_artifact_ios
         with:
-          flavor: 'stg'
+          flavor: 'env/test-ci'
 
       - name: create artifact 'prod'
         if: startsWith(github.ref_name, 'release')

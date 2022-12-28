@@ -25,5 +25,5 @@ runs:
           cd ${GITHUB_WORKSPACE}/repository
           echo 'target:release-only'
           echo ${{ inputs.build-target }}
-          echo ${{ inputs.flavor }}
+          echo ${{ inputs.flavor##*/ }}
         shell: bash
