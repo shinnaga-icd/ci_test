@@ -27,4 +27,12 @@ runs:
           echo ${{ inputs.build-target }}
           echo ${{ inputs.flavor }}
           echo $(echo ${{ inputs.flavor }} | sed 's/env\///')
+          touch ${{ github.workspace }}/test.txt
         shell: bash
+
+      - name: upload artifact
+        uses: actions/upload-artifact@v3.1.1
+        with: 
+          name: iOS_$(echo ${{ inputs.flavor }} | sed 's/env\///')
+          path: ${{ github.workspace }}/*
+          retention-days: 15
