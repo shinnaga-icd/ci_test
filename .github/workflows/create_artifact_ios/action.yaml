@@ -30,9 +30,12 @@ runs:
           touch ${{ github.workspace }}/test.txt
         shell: bash
 
+      - name: set artifact name
+        run: echo  'artifact-name'$(echo ${{ inputs.flavor }} | sed 's/env\///') >> $GITHUB_ENV 
+
       - name: upload artifact
         uses: actions/upload-artifact@v3.1.1
         with: 
-          name: ${{ $inputs.flavor }} 
+          name: ${{ $env.artifact-name }} 
           path: ${{ github.workspace }}/*
           retention-days: 15
